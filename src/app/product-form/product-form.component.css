@@ -1,0 +1,107 @@
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-title {
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .registration-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .form-row {
+    display: flex;
+    gap: 16px;
+  }
+  
+  .form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-bottom: 4px;
+    font-size: 14px;
+  }
+  
+  .form-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .form-input.error {
+    border-color: #f87171;
+  }
+  
+  .error-message {
+    color: #f87171;
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  
+  .btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .btn-cancel {
+    background-color: #e5e7eb;
+    color: #374151;
+  }
+  
+  .btn-submit {
+    background-color: #fbbf24;
+    color: #000000;
+  }
+  
+  .btn-cancel:hover {
+    background-color: #d1d5db;
+  }
+  
+  .btn-submit:hover {
+    background-color: #f59e0b;
+  }
+  
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+  }
+  
+  input[type="date"]:disabled {
+    background-color: #f3f4f6;
+  }
+  .btn-cancel-red {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .btn-cancel-red:hover {
+    background-color: darkred;
+  }
