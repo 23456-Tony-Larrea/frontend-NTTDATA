@@ -84,7 +84,7 @@ export class ProductFormComponent implements OnInit {
     this.router.navigate(['/productos']);
   }
 
-  public showToast(message: string, type: 'success' | 'error'): void { // Cambiado a public
+  public showToast(message: string, type: 'success' | 'error'): void {
     this.toastComponent.message = message;
     this.toastComponent.backgroundColor = type === 'success' ? 'green' : 'red';
     this.toastComponent.ngOnInit();

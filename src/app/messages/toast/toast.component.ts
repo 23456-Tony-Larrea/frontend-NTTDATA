@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ToastComponent implements OnInit {
   @Input() message: string = '';
-  @Input() duration: number = 3000; // Duración en milisegundos
+  @Input() duration: number = 3000; 
   @Input() backgroundColor: string = '#333';
   @Input() textColor: string = '#fff';
 

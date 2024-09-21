@@ -1,68 +1,73 @@
-<div class="form-container">
-  <h2 class="form-title">Formulario de Registro</h2>
-  <app-toast></app-toast>
-  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="registration-form">
-    <div class="form-row">
-      <div class="form-group">
-        <label for="id">ID</label>
-        <input id="id" formControlName="id" class="form-input" />
-        <p *ngIf="productForm.get('id')!.invalid && productForm.get('id')!.touched" class="error-message">
-          {{ productForm.get('id')!.errors?.['required'] ? 'ID es requerido' : '' }}
-          {{ productForm.get('id')!.errors?.['minlength'] ? 'ID debe tener al menos 3 caracteres' : '' }}
-          {{ productForm.get('id')!.errors?.['maxlength'] ? 'ID no debe tener más de 10 caracteres' : '' }}
-          {{ productForm.get('id')!.errors?.['idExists'] ? 'ID ya existe en la base de datos' : '' }}
-        </p>
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="form-container">
+    <h2 class="form-title">Formulario de Registro</h2>
+    <app-toast></app-toast>
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="registration-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="id">ID</label>
+          <input id="id" formControlName="id" class="form-input" />
+          <p *ngIf="productForm.get('id')!.invalid && productForm.get('id')!.touched" class="error-message">
+            {{ productForm.get('id')!.errors?.['required'] ? 'ID es requerido' : '' }}
+            {{ productForm.get('id')!.errors?.['minlength'] ? 'ID debe tener al menos 3 caracteres' : '' }}
+            {{ productForm.get('id')!.errors?.['maxlength'] ? 'ID no debe tener más de 10 caracteres' : '' }}
+            {{ productForm.get('id')!.errors?.['idExists'] ? 'ID ya existe en la base de datos' : '' }}
+          </p>
+        </div>
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input id="nombre" formControlName="name" class="form-input" placeholder="Tarjeta Credito" />
+          <p *ngIf="productForm.get('name')!.invalid && productForm.get('name')!.touched" class="error-message">
+            {{ productForm.get('name')!.errors?.['required'] ? 'Nombre es requerido' : '' }}
+            {{ productForm.get('name')!.errors?.['minlength'] ? 'Nombre debe tener al menos 5 caracteres' : '' }}
+            {{ productForm.get('name')!.errors?.['maxlength'] ? 'Nombre no debe tener más de 100 caracteres' : '' }}
+          </p>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="nombre">Nombre</label>
-        <input id="nombre" formControlName="name" class="form-input" placeholder="Tarjeta Credito" />
-        <p *ngIf="productForm.get('name')!.invalid && productForm.get('name')!.touched" class="error-message">
-          {{ productForm.get('name')!.errors?.['required'] ? 'Nombre es requerido' : '' }}
-          {{ productForm.get('name')!.errors?.['minlength'] ? 'Nombre debe tener al menos 5 caracteres' : '' }}
-          {{ productForm.get('name')!.errors?.['maxlength'] ? 'Nombre no debe tener más de 100 caracteres' : '' }}
-        </p>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="descripcion">Descripción</label>
+          <input id="descripcion" formControlName="description" class="form-input" />
+          <p *ngIf="productForm.get('description')!.invalid && productForm.get('description')!.touched" class="error-message">
+            {{ productForm.get('description')!.errors?.['required'] ? 'Descripción es requerida' : '' }}
+            {{ productForm.get('description')!.errors?.['minlength'] ? 'Descripción debe tener al menos 10 caracteres' : '' }}
+            {{ productForm.get('description')!.errors?.['maxlength'] ? 'Descripción no debe tener más de 200 caracteres' : '' }}
+          </p>
+        </div>
+        <div class="form-group">
+          <label for="logo">Logo</label>
+          <input id="logo" formControlName="logo" class="form-input" />
+          <p *ngIf="productForm.get('logo')!.invalid && productForm.get('logo')!.touched" class="error-message">
+            {{ productForm.get('logo')!.errors?.['required'] ? 'Logo es requerido' : '' }}
+          </p>
+        </div>
       </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label for="descripcion">Descripción</label>
-        <input id="descripcion" formControlName="description" class="form-input" />
-        <p *ngIf="productForm.get('description')!.invalid && productForm.get('description')!.touched" class="error-message">
-          {{ productForm.get('description')!.errors?.['required'] ? 'Descripción es requerida' : '' }}
-          {{ productForm.get('description')!.errors?.['minlength'] ? 'Descripción debe tener al menos 10 caracteres' : '' }}
-          {{ productForm.get('description')!.errors?.['maxlength'] ? 'Descripción no debe tener más de 200 caracteres' : '' }}
-        </p>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fecha-liberacion">Fecha Liberación</label>
+          <input id="fecha-liberacion" type="date" formControlName="date_release" class="form-input" />
+          <p *ngIf="productForm.get('date_release')!.invalid && productForm.get('date_release')!.touched" class="error-message">
+            {{ productForm.get('date_release')!.errors?.['required'] ? 'Fecha de liberación es requerida' : '' }}
+            {{ productForm.get('date_release')!.errors?.['min'] ? 'Fecha de liberación debe ser igual o mayor a la fecha actual' : '' }}
+          </p>
+        </div>
+        <div class="form-group">
+          <label for="fecha-revision">Fecha Revisión</label>
+          <input id="fecha-revision" type="date" formControlName="date_revision" class="form-input" />
+          <p *ngIf="productForm.get('date_revision')!.invalid && productForm.get('date_revision')!.touched" class="error-message">
+            {{ productForm.get('date_revision')!.errors?.['required'] ? 'Fecha de revisión es requerida' : '' }}
+            {{ productForm.get('date_revision')!.errors?.['is-one-year-later'] ? 'Fecha de revisión debe ser exactamente un año posterior a la fecha de liberación' : '' }}
+          </p>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="logo">Logo</label>
-        <input id="logo" formControlName="logo" class="form-input" />
-        <p *ngIf="productForm.get('logo')!.invalid && productForm.get('logo')!.touched" class="error-message">
-          {{ productForm.get('logo')!.errors?.['required'] ? 'Logo es requerido' : '' }}
-        </p>
+      <div class="form-actions">
+        <button type="button" (click)="onReset()" class="btn btn-cancel">Reiniciar</button>
+        <button type="button" (click)="onCancel()" class="btn btn-cancel-red">Cancelar</button>
+        <button type="submit" class="btn btn-submit">Enviar</button>
       </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label for="fecha-liberacion">Fecha Liberación</label>
-        <input id="fecha-liberacion" type="date" formControlName="date_release" class="form-input" />
-        <p *ngIf="productForm.get('date_release')!.invalid && productForm.get('date_release')!.touched" class="error-message">
-          {{ productForm.get('date_release')!.errors?.['required'] ? 'Fecha de liberación es requerida' : '' }}
-          {{ productForm.get('date_release')!.errors?.['min'] ? 'Fecha de liberación debe ser igual o mayor a la fecha actual' : '' }}
-        </p>
-      </div>
-      <div class="form-group">
-        <label for="fecha-revision">Fecha Revisión</label>
-        <input id="fecha-revision" type="date" formControlName="date_revision" class="form-input" />
-        <p *ngIf="productForm.get('date_revision')!.invalid && productForm.get('date_revision')!.touched" class="error-message">
-          {{ productForm.get('date_revision')!.errors?.['required'] ? 'Fecha de revisión es requerida' : '' }}
-          {{ productForm.get('date_revision')!.errors?.['is-one-year-later'] ? 'Fecha de revisión debe ser exactamente un año posterior a la fecha de liberación' : '' }}
-        </p>
-      </div>
-    </div>
-    <div class="form-actions">
-      <button type="button" (click)="onReset()" class="btn btn-cancel">Reiniciar</button>
-      <button type="button" (click)="onCancel()" class="btn btn-cancel-red">Cancelar</button>
-      <button type="submit" class="btn btn-submit">Enviar</button>
-    </div>
-  </form>
-</div>
+    </form>
+  </div>
+</body>

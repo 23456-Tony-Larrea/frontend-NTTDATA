@@ -21,7 +21,7 @@ export class ListadoProductosComponent implements OnInit {
   showDeleteModal: boolean = false;
   productIdToDelete: string | null = null;
   loading: boolean = true;
-  placeholders: any[] = []; // Array para skeleton placeholders
+  placeholders: any[] = []; 
   @ViewChild(ToastComponent) toastComponent!: ToastComponent;
 
   constructor(private productService: ProductoService, private router: Router, private cdr: ChangeDetectorRef) {}

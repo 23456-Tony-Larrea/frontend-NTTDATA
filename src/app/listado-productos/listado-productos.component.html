@@ -1,86 +1,91 @@
-<div class="container">
-  <div class="header">
-    <h1>Listado de Productos Financieros</h1>
-  </div>
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Listado de Productos Financieros</h1>
+    </div>
 
-  <div class="controls">
-    <input type="text" placeholder="Buscar..." class="search-input" [(ngModel)]="searchTerm" (input)="filterProducts()">
-    <button class="add-button" (click)="addProduct()">Agregar</button>
-  </div>
+    <div class="controls">
+      <input type="text" placeholder="Buscar..." class="search-input" [(ngModel)]="searchTerm" (input)="filterProducts()">
+      <button class="button">
+        <span class="lable"  (click)="addProduct()">AGREGAR</span>
+      </button>
+    </div>
 
-  <div class="controls">
-    <label for="itemsPerPage">Mostrar:</label>
-    <select id="itemsPerPage" (change)="onItemsPerPageChange($event)">
-      <option value="5">5</option>
-      <option value="10">10</option>
-      <option value="20">20</option>
-    </select>
-  </div>
+    <div class="controls">
+      <label for="itemsPerPage">Mostrar:</label>
+      <select id="itemsPerPage" (change)="onItemsPerPageChange($event)">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+      </select>
+    </div>
 
-  <table class="product-table">
-    <thead>
-      <tr>
-        <th>Logo</th>
-        <th>Nombre del producto</th>
-        <th>Descripción</th>
-        <th>Fecha de liberación</th>
-        <th>Fecha de reestructuración</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Mostrar Skeletons cuando los datos aún no se han cargado -->
-      <ng-container *ngIf="loading; else dataLoaded">
-        <tr *ngFor="let placeholder of placeholders">
-          <td>
-            <div class="skeleton skeleton-logo"></div>
-          </td>
-          <td><div class="skeleton skeleton-text"></div></td>
-          <td><div class="skeleton skeleton-text"></div></td>
-          <td><div class="skeleton skeleton-text"></div></td>
-          <td><div class="skeleton skeleton-text"></div></td>
-          <td>
-            <div class="skeleton skeleton-actions"></div>
-          </td>
+    <table class="product-table">
+      <thead>
+        <tr>
+          <th>Logo</th>
+          <th>Nombre del producto</th>
+          <th>Descripción</th>
+          <th>Fecha de liberación</th>
+          <th>Fecha de reestructuración</th>
+          <th>Acciones</th>
         </tr>
-      </ng-container>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="loading; else dataLoaded">
+          <tr *ngFor="let placeholder of placeholders">
+            <td>
+              <div class="skeleton skeleton-logo"></div>
+            </td>
+            <td><div class="skeleton skeleton-text"></div></td>
+            <td><div class="skeleton skeleton-text"></div></td>
+            <td><div class="skeleton skeleton-text"></div></td>
+            <td><div class="skeleton skeleton-text"></div></td>
+            <td>
+              <div class="skeleton skeleton-actions"></div>
+            </td>
+          </tr>
+        </ng-container>
 
-      <!-- Datos reales una vez que se han cargado -->
-      <ng-template #dataLoaded>
-        <tr *ngFor="let product of filteredProducts | slice:0:itemsPerPage">
-          <td>
-            <img [src]="'https://www.visa.com.ec/dam/VCOM/regional/lac/SPA/Default/Pay%20With%20Visa/Tarjetas/visa-signature-400x225.jpg'" alt="Product Logo" class="product-logo">
-          </td>
-          <td>{{ product.name }}</td>
-          <td>{{ product.description }}</td>
-          <td>{{ product.date_release }}</td>
-          <td>{{ product.date_revision }}</td>
-          <td class="actions">
-            <div class="dropdown">
-              <button class="dropdown-button" (click)="toggleDropdown(product.id)">
-                &#x22EE;
-              </button>
-              <div class="dropdown-content" [class.show]="dropdownOpen === product.id">
-                <button class="yellow-button" (click)="editProduct(product.id)">Editar</button>
-                <button class="gray-button" (click)="confirmDeleteProduct(product.id)">Eliminar</button>
+        <ng-template #dataLoaded>
+          <tr *ngFor="let product of filteredProducts | slice:0:itemsPerPage">
+            <td>
+              <img [src]="'https://www.visa.com.ec/dam/VCOM/regional/lac/SPA/Default/Pay%20With%20Visa/Tarjetas/visa-signature-400x225.jpg'" alt="Product Logo" class="product-logo">
+            </td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.date_release }}</td>
+            <td>{{ product.date_revision }}</td>
+            <td class="actions">
+              <div class="dropdown">
+                <button class="dropdown-button" (click)="toggleDropdown(product.id)">
+                  &#x22EE;
+                </button>
+                <div class="dropdown-content" [class.show]="dropdownOpen === product.id">
+                  <button class="yellow-button" (click)="editProduct(product.id)">Editar</button>
+                  <button class="gray-button" (click)="confirmDeleteProduct(product.id)">Eliminar</button>
+                </div>
               </div>
-            </div>
-          </td>
-        </tr>
-      </ng-template>
-    </tbody>
-  </table>
+            </td>
+          </tr>
+        </ng-template>
+      </tbody>
+    </table>
 
-  <div class="pagination">
-    <span>{{ filteredProducts.length }} Resultados</span>
-  </div>
+    <div class="pagination">
+      <span>{{ filteredProducts.length }} Resultados</span>
+    </div>
 
-  <div class="modal" [class.show]="showDeleteModal">
-    <div class="modal-content">
-      <span class="close" (click)="closeModal()">&times;</span>
-      <p>¿Estás seguro de que deseas eliminar este producto?</p>
-      <button class="gray-button" (click)="deleteProduct()">Eliminar</button>
-      <button class="yellow-button" (click)="cancelDelete()">Cancelar</button>
+    <div class="modal" [class.show]="showDeleteModal">
+      <div class="modal-content">
+        <span class="close" (click)="closeModal()">&times;</span>
+        <p>¿Estás seguro de que deseas eliminar este producto?</p>
+        <button class="gray-button" (click)="deleteProduct()">Eliminar</button>
+        <button class="yellow-button" (click)="cancelDelete()">Cancelar</button>
+      </div>
     </div>
   </div>
-</div>
+</body>
